@@ -5,6 +5,7 @@ import Banner from '../Components/HomePageComponents/Banner';
 import Navbar from '../Shared/Navbar';
 import AboutUs from '../Components/HomePageComponents/AboutUs';
 import Software from '../Components/HomePageComponents/Software';
+import Footer from '../Components/Footer';
 
 const Home = () => {
     return (
@@ -18,6 +19,7 @@ const Home = () => {
             <Banner></Banner>
             <AboutUs></AboutUs>
             <Software></Software>
+            <Footer></Footer>
         </Container>
     );
 };
