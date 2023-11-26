@@ -7,7 +7,7 @@ import { MdOutlineSecurity } from "react-icons/md";
 const AboutUs = () => {
     return (
         <div className="my-20 lg:px-20">
-            <h1 className="text-5xl text-[#5bc2ab] text-center font-bold">Why People Choose Us</h1>
+            <h1 className="text-5xl text-[#5bc2ab] text-center font-bold">About Us</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 mt-10">
 
                 <div className="text-center px-4 py-2 flex flex-col justify-center items-center">
@@ -39,13 +39,13 @@ const AboutUs = () => {
                 <div className="text-center px-4 py-2 flex flex-col justify-center items-center">
                     <FaHandsHelping  className="text-6xl text-[#5bc2ab]"></FaHandsHelping >
                     <h1 className="text-2xl my-4 font-semibold">24/7 Chat Support</h1>
-                    <p className="text-md font-medium ">Our Average response time is less than a minute.</p>
+                    <p className="text-md font-medium ">Our Average response time is less than 10 minute.</p>
                 </div>
 
                 <div className="text-center px-4 py-2 flex flex-col justify-center items-center">
                     <FaUniversalAccess  className="text-6xl text-[#5bc2ab]"></FaUniversalAccess >
                     <h1 className="text-2xl my-4 font-semibold">Instant Access</h1>
-                    <p className="text-md font-medium ">Use TranZact anytime and anywhere in the world.</p>
+                    <p className="text-md font-medium ">Use InventoHUB anytime and anywhere in the world.</p>
                 </div>
             </div>
         </div>

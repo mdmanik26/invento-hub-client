@@ -4,6 +4,7 @@ import Container from '../Components/Container'
 import Banner from '../Components/HomePageComponents/Banner';
 import Navbar from '../Shared/Navbar';
 import AboutUs from '../Components/HomePageComponents/AboutUs';
+import Software from '../Components/HomePageComponents/Software';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <Navbar></Navbar>
             <Banner></Banner>
             <AboutUs></AboutUs>
+            <Software></Software>
         </Container>
     );
 };
