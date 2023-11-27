@@ -2,15 +2,80 @@ import { Helmet } from "react-helmet-async";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaGoogle, FaUser, FaUserCircle } from "react-icons/fa";
 import { BiSolidLockOpen } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Shared/AuthProvider";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 
 const Login = () => {
+    const axiosPublic = useAxiosPublic()
+    const { login, googleSignIn } = useContext(AuthContext)
     const [show, setShow] = useState(null)
+    const navigate = useNavigate()
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value
+
+        login(email, password)
+            .then(res => {
+                console.log(res.user);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/')
+            })
+            .catch(err => {
+                if (err) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Invalid username or password",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(res => {
+
+                const userInfo = {
+                    name: res.user?.displayName,
+                    email: res.user?.email
+                }
+
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        navigate('/')
+                    })
+
+
+
+
+
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+
+
     return (
         <div className="p-5 border-2 rounded-lg shadow-lg max-w-[500px] mx-auto min-h-[400px] my-20 bg-gradient-to-r from-slate-50 to-slate-100">
-            <form className="px-3">
+            <form onSubmit={handleLogin} className="px-3">
                 <Helmet>
                     <title>InventoHUB | Login</title>
                 </Helmet>
@@ -41,14 +106,14 @@ const Login = () => {
                     <label className="label my-2">
                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                     </label>
-                    <input className='btn btn-primary w-full' type="submit" name="" value="Login" />
+                    <input className='btn btn-outline bg-[#5bc2ab] w-full' type="submit" name="" value="Login" />
                     <p className="my-4 text-center">Dont have an account? <Link className="text-blue-600" to={'/signUp'}>Register</Link></p>
 
 
 
                 </div>
             </form>
-            <button className="flex gap-2 w-full items-center btn btn-outline bg-amber-500"> <FaGoogle className="text-red-500 text-xl"></FaGoogle> Sign In With Google</button>
+            <button onClick={handleGoogle} className="flex gap-2 w-full items-center btn btn-outline bg-[#5bc2ab]"> <FaGoogle className="text-red-500 text-xl"></FaGoogle> Sign In With Google</button>
         </div>
     );
 };

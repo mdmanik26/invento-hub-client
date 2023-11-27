@@ -4,6 +4,8 @@ import Home from "../Pages/Home";
 import SignUp from "../Pages/SignUp";
 import Login from "../Pages/Login";
 import Error from "../Pages/Error";
+import CreateShop from "../Pages/CreateShop";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 export const router = createBrowserRouter([
@@ -23,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/createShop',
+                element: <PrivateRoutes><CreateShop></CreateShop></PrivateRoutes>
             }
 
 
