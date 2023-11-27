@@ -7,6 +7,7 @@ import AboutUs from '../Components/HomePageComponents/AboutUs';
 import Software from '../Components/HomePageComponents/Software';
 import Footer from '../Components/Footer';
 import Time from '../Components/HomePageComponents/Time';
+import Package from '../Components/HomePageComponents/Package';
 
 const Home = () => {
     return (
@@ -21,6 +22,7 @@ const Home = () => {
             <AboutUs></AboutUs>
             <Software></Software>
             <Time></Time>
+            <Package></Package>
             <Footer></Footer>
 
         </Container>
