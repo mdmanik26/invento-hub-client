@@ -51,18 +51,18 @@ const SignUp = () => {
 
                 <input {...register("photo", { required: true })} required className="outline-0  w-full py-2 px-3" type="text" name="photo" placeholder="photo" /> <br />
                 {errors.photo && <span className="text-red-600">Photo is required</span>}
-                <br /><br />
+                <br />
 
                 <p className="mb-2 text-xl font-medium text-gray-500">Name</p>
 
                 <input {...register("name", { required: true })} required className="outline-0  w-full py-2 px-3" type="text" name="name" placeholder="Name" /> <br />
                 {errors.name && <span className="text-red-600">Name is required</span>}
-                <br /><br />
+                <br />
 
                 <p className="mb-2 text-xl font-medium text-gray-500">Email</p>
                 <input {...register("email", { required: true })} className="outline-0  w-full py-2 px-3" type="email" name="email" placeholder="Email" required /> <br />
                 {errors.email && <span className="text-red-600">Email is required</span>}
-                <br /><br />
+                <br />
                 <p className="mb-2 text-xl font-medium text-gray-500">Password</p>
                 <input {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /^(?=.*[A-Z])(?=.*[\W_]).+$/ })} className=" outline-0  w-full py-2 px-3"
                     type="password"
