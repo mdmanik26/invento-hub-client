@@ -14,9 +14,9 @@ const Navbar = () => {
                 <div className="flex-1  flex flex-row lg:flex-row gap-6 justify-between items-center  px-3 py-5">
 
 
-                    <div className="hidden lg:block">
+                    <div className="hidden lg:flex  items-center ">
+                        <img className="w-[70px] " src="https://i.ibb.co/S3H8g8q/logo1.png" alt="" />
                         <h1 className="text-3xl font-bold text-white">InventoHUB</h1>
-
                     </div>
 
 
