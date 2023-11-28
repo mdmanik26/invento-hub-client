@@ -4,16 +4,22 @@ import { Link, NavLink } from "react-router-dom";
 import './NavBar.css'
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { AuthContext } from "./AuthProvider";
-import useUsers from "../Hooks/useUsers";
+import useAdmin from "../Hooks/useAdmin";
+import useManager from "../Hooks/useManager";
+
+
 const Navbar = () => {
-    
-    const [staff] = useUsers()
-    console.log('user from hooks', staff?.role)
-
+   const [isAdmin] = useAdmin()
+   const [isManager] = useManager()
+//    console.log(isManager)
     const { user, logOut } = useContext(AuthContext)
-
     const [menu, setMenu] = useState()
     const [open, setOpen] = useState()
+
+   
+
+
+
     return (
 
         <div className=" text-white bg-[#5fcab3]">
@@ -43,9 +49,11 @@ const Navbar = () => {
                             ${menu ? "top-18 left-8 bg-[#5fcab3ab]  lg:bg-transparent text-black" : "-top-40 right-8"}`}>
                                 <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><NavLink to={'/'}>Home</NavLink></li>
 
-                                {staff?.role === 'manager' ? "" : <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><NavLink to={'/createShop'}>Create Store</NavLink></li>}
+                                {isAdmin || isManager ? "" : <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><NavLink to={'/createShop'}>Create Store</NavLink></li>}
 
-                                {staff?.role === 'manager' || staff?.role === 'admin' ? <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard'}>Dashboard</Link></li> : ""}
+                                {isManager ? <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard/managerHome'}>Dashboard</Link></li> : ""}
+
+                                {isAdmin ? <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard'}>Dashboard</Link></li> : ""}
 
                                 <li className=" rounded-b-md lg:rounded-b-0  text-black md:text-black text-center lg:text-left px-2 lg:px-0"><a rel="noreferrer" target="_blank" href="https://youtu.be/jk8L4_Wx40U?si=UrlaHwHULTYftHL6"> Watch Demo</a></li>
                             </ul> :

@@ -6,13 +6,19 @@ import Login from "../Pages/Login";
 import Error from "../Pages/Error";
 import CreateShop from "../Pages/CreateShop";
 import PrivateRoutes from "./PrivateRoutes";
+import Dashboard from "../Layout/Dashboard";
+import AdminHome from "../Pages/Dashboard/AdminHome";
+import ManagerHome from "../Pages/Dashboard/ManagerHome";
+import AdminRoute from "./AdminRoute";
+import ManagerRoute from "./ManagerRoute";
+import Allusers from "../Pages/Dashboard/Allusers";
 
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Root></Root>,
-        errorElement:<Error></Error>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
@@ -29,6 +35,24 @@ export const router = createBrowserRouter([
             {
                 path: '/createShop',
                 element: <PrivateRoutes><CreateShop></CreateShop></PrivateRoutes>
+            },
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>,
+                children: [
+                    {
+                        path: '/dashboard/adminHome',
+                        element: <AdminHome></AdminHome>
+                    },
+                    {
+                        path: '/dashboard/managerHome',
+                        element: <ManagerHome></ManagerHome>
+                    },
+                    {
+                        path: '/dashboard/allUsers',
+                        element: <Allusers></Allusers>
+                    }
+                ]
             }
 
 
