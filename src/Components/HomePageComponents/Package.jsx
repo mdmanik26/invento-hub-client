@@ -1,10 +1,19 @@
-
+import Aos from "aos";
+import 'aos/dist/aos.css'
+import { useEffect } from "react";
 
 const Package = () => {
+
+    useEffect(() => {
+        Aos.init({ duration: 2000 })
+    }, [])
+
+
+
     return (
         <div className="my-10">
             <h1 className="text-5xl font-bold text-center mx-auto mb-10 max-w-[1000px] text-[#5bc2ab] ">Make your business easier by <br />purchasing our package</h1>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-20 md:px-4 lg:px-20 gap-10">
+            <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-20 md:px-4 lg:px-20 gap-10">
 
                 <div className="rounded-lg border border-[#5bc2ab] px-4 py-6 space-y-3">
                     <p className="text-xl text-slate-400">FREE</p>
@@ -42,7 +51,7 @@ const Package = () => {
                     <p>$ 199 billed monthly</p>
                     <button className="btn btn-outline bg-[#5bc2ab] w-full">Get Started</button>
                 </div>
-               
+
 
             </div>
         </div>

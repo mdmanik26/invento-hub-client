@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Shared/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const CreateShop = () => {
@@ -23,8 +24,9 @@ const CreateShop = () => {
         const shopLocation = form.location.value
         const ownerEmail = form.email.value
         const ownerName = form.name.value
+        const productLimit = 3
 
-        const shop = { shopName, shopLogo, shopInfo, shopLocation, ownerEmail, ownerName }
+        const shop = { shopName, shopLogo, shopInfo, shopLocation, ownerEmail, ownerName, productLimit }
         // console.log(shop)
 
         axiosPublic.post('/shops', shop)
@@ -64,6 +66,10 @@ const CreateShop = () => {
     }
     return (
         <Container>
+            
+            <Helmet>
+                <title>InventoHUB | Create Shop </title>
+            </Helmet>
 
             <Navbar></Navbar>
             <div className="my-20">

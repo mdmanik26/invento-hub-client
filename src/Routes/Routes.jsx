@@ -7,11 +7,19 @@ import Error from "../Pages/Error";
 import CreateShop from "../Pages/CreateShop";
 import PrivateRoutes from "./PrivateRoutes";
 import Dashboard from "../Layout/Dashboard";
-import AdminHome from "../Pages/Dashboard/AdminHome";
 import ManagerHome from "../Pages/Dashboard/ManagerHome";
-import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
-import Allusers from "../Pages/Dashboard/Allusers";
+import ProductManagement from "../Pages/Dashboard/ManagersPages/ProductManagement";
+import AddProduct from "../Components/ManagersComponent/AddProduct";
+import AdminRoute from "./AdminRoute";
+import ManageShop from "../Pages/Dashboard/AdminPages/ManageShop";
+import UpdateProduct from "../Pages/Dashboard/ManagersPages/UpdateProduct";
+import SalesCollection from "../Pages/Dashboard/ManagersPages/SalesCollection";
+import CartCollection from "../Pages/Dashboard/ManagersPages/CartCollection";
+import CheckOut from "../Pages/Dashboard/ManagersPages/CheckOut";
+import Subscription from "../Pages/Dashboard/Subscription";
+
+import SaleSummary from "../Pages/Dashboard/AdminPages/SaleSummary";
 
 
 export const router = createBrowserRouter([
@@ -38,20 +46,55 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <Dashboard></Dashboard>,
+                element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
                 children: [
+                   
+                   
                     {
-                        path: '/dashboard/adminHome',
-                        element: <AdminHome></AdminHome>
+                        path: '/dashboard/manageShop',
+                        element: <AdminRoute><ManageShop></ManageShop></AdminRoute>
                     },
                     {
-                        path: '/dashboard/managerHome',
+                        path: '/dashboard/saleSummary',
+                        element: <AdminRoute><SaleSummary></SaleSummary></AdminRoute>
+                    },
+                    {
+                        path: '/dashboard/salesSummary',
                         element: <ManagerHome></ManagerHome>
                     },
                     {
-                        path: '/dashboard/allUsers',
-                        element: <Allusers></Allusers>
-                    }
+                        path: '/dashboard/productManagement',
+                        element: <ManagerRoute><ProductManagement></ProductManagement></ManagerRoute>
+                    },
+                    {
+                        path: '/dashboard/productManagement/addProduct',
+                        element: <ManagerRoute><AddProduct></AddProduct></ManagerRoute>
+                    },
+                    {
+                        path: '/dashboard/productManagement/updateProduct/:id',
+                        element: <ManagerRoute><UpdateProduct></UpdateProduct></ManagerRoute>,
+                        loader: ({ params }) => fetch(`https://invento-hub-server.vercel.app/product/${params.id}`)
+                    },
+                    {
+                        path: '/dashboard/salesCollection',
+                        element: <ManagerRoute><SalesCollection></SalesCollection></ManagerRoute>
+                    },
+
+                    {
+                        path: '/dashboard/cart',
+                        element: <ManagerRoute><CartCollection></CartCollection></ManagerRoute>
+                    },
+                    {
+                        path: '/dashboard/checkOut',
+                        element: <ManagerRoute><CheckOut></CheckOut></ManagerRoute>
+                    },
+                    {
+                        path: '/dashboard/subscription',
+                        element: <ManagerRoute><Subscription></Subscription></ManagerRoute>,
+                        
+                       
+                    },
+                   
                 ]
             }
 

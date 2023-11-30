@@ -4,17 +4,34 @@ import { Link, NavLink } from "react-router-dom";
 import './NavBar.css'
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { AuthContext } from "./AuthProvider";
-import useAdmin from "../Hooks/useAdmin";
-import useManager from "../Hooks/useManager";
+import { useQuery } from "@tanstack/react-query";
+
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+
+
+
+
 
 
 const Navbar = () => {
-   const [isAdmin] = useAdmin()
-   const [isManager] = useManager()
-//    console.log(isManager)
+    const [staff, setStaff] = useState()
+    console.log(staff?.role);
     const { user, logOut } = useContext(AuthContext)
     const [menu, setMenu] = useState()
     const [open, setOpen] = useState()
+    const axiosPublic = useAxiosPublic()
+    
+    
+    
+    const { data} = useQuery({
+        queryKey: [user?.email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/users/${user?.email}`)
+            console.log(res.data)
+            setStaff(res.data)
+        
+        }
+    })
 
    
 
@@ -49,11 +66,13 @@ const Navbar = () => {
                             ${menu ? "top-18 left-8 bg-[#5fcab3ab]  lg:bg-transparent text-black" : "-top-40 right-8"}`}>
                                 <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><NavLink to={'/'}>Home</NavLink></li>
 
-                                {isAdmin || isManager ? "" : <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><NavLink to={'/createShop'}>Create Store</NavLink></li>}
+                                {staff?.role === 'admin' || staff?.role === 'manager' ? "" : <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><NavLink to={'/createShop'}>Create Store</NavLink></li> }
 
-                                {isManager ? <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard/managerHome'}>Dashboard</Link></li> : ""}
+                                {staff?.role === 'manager' ?  <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard/salesSummary'}>Dashboard</Link></li> : ""}
 
-                                {isAdmin ? <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard'}>Dashboard</Link></li> : ""}
+
+                                {staff?.role === 'admin' ? <li className="  text-black md:text-black text-center lg:text-left lg:border-0 px-2 lg:px-0"><Link to={'/dashboard/saleSummary'}>Dashboard</Link></li> : ""}
+
 
                                 <li className=" rounded-b-md lg:rounded-b-0  text-black md:text-black text-center lg:text-left px-2 lg:px-0"><a rel="noreferrer" target="_blank" href="https://youtu.be/jk8L4_Wx40U?si=UrlaHwHULTYftHL6"> Watch Demo</a></li>
                             </ul> :

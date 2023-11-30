@@ -2,11 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../Shared/AuthProvider";
 import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+// import useAxiosPublic from "./useAxiosPublic";
 
 
 const useManager = () => {
     const { user } = useContext(AuthContext)
+    // console.log(user);
     const axiosSecure = useAxiosSecure();
+    // const axiosPublic = useAxiosPublic()
   
 
     const { data: isManager, isPending: isManagerLoading } = useQuery({
